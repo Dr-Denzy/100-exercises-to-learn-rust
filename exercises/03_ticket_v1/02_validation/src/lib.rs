@@ -4,6 +4,7 @@ struct Ticket {
     status: String,
 }
 
+
 impl Ticket {
     // TODO: implement the `new` function.
     //  The following requirements should be met:
@@ -17,12 +18,55 @@ impl Ticket {
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        if !Self::valid_title(&title) {
+            panic!("Title cannot be empty")
+        }
+
+        if Self::overly_long_title(&title) {
+            panic!("Title cannot be longer than 50 bytes")
+        }
+
+        if !Self::valid_description(&description) {
+            panic!("Description cannot be empty")
+        }
+
+        if Self::overly_long_description(&description) {
+            panic!("Description cannot be longer than 500 bytes")
+        }
+
+        if !Self::allowed_status(&status) {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed")
+        }
+
+
         Self {
             title,
             description,
             status,
         }
+    }
+
+    fn allowed_status(status: &str) -> bool {
+        match status {
+            "To-Do" | "In Progress" | "Done" => true,
+            _ => false,
+        }
+    }
+
+    fn valid_title(title: &str) -> bool {
+        title.len() > 0
+    }
+
+    fn overly_long_title(title: &str) -> bool {
+        title.as_bytes().len() > 50
+    }
+
+    fn valid_description(descr: &str) -> bool {
+        descr.len() > 0
+    }
+
+    fn overly_long_description(descr: &str) -> bool {
+        descr.as_bytes().len() > 500
     }
 }
 

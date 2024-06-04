@@ -6,6 +6,8 @@ use outro_02::Order;
 
 #[test]
 fn test_order() {
+
+    // &mut self option
     let mut order = Order::new("Rusty Book".to_string(), 3, 2999);
 
     assert_eq!(order.product_name(), "Rusty Book");
@@ -21,6 +23,21 @@ fn test_order() {
     assert_eq!(order.quantity(), &2);
     assert_eq!(order.unit_price(), &3999);
     assert_eq!(order.total(), 7998);
+
+    // mut self option
+
+    let mut order2 = Order::new("Rusty Book".to_string(), 3, 2999);
+    assert_eq!(order2.product_name(), "Rusty Book");
+    assert_eq!(order2.quantity(), &3);
+    assert_eq!(order2.unit_price(), &2999);
+    assert_eq!(order2.total(), 8997);
+
+    let order2 = order2.set_product_name1("Rust Book".to_string()).set_quantity1(2).set_unit_price1(3999);
+
+    assert_eq!(order2.product_name(), "Rust Book");
+    assert_eq!(order2.quantity(), &2);
+    assert_eq!(order2.unit_price(), &3999);
+    assert_eq!(order2.total(), 7998);
 }
 
 // Validation tests

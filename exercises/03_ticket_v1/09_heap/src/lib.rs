@@ -12,8 +12,10 @@ mod tests {
     use std::mem::size_of;
 
     #[test]
+
+    // string_size = pointer (8 bytes) + length (8 bytes) + capacity (8 bytes) = 24 bytes
     fn string_size() {
-        assert_eq!(size_of::<String>(), todo!());
+        assert_eq!(size_of::<String>(), 24);
     }
 
     #[test]
@@ -22,7 +24,9 @@ mod tests {
         // The "intuitive" answer happens to be the correct answer this time,
         // but, in general, the memory layout of structs is a more complex topic.
         // If you're curious, check out the "Data layout" section of the Rustonomicon
-        // https://doc.rust-lang.org/nomicon/data.html for more information.
-        assert_eq!(size_of::<Ticket>(), todo!());
+        // https://doc.rust-lang.org/nomicon/data.html for more information.}
+
+        // ticket_size = title (24 bytes) + description (24 bytes) + status (24 bytes) = 72 bytes
+        assert_eq!(size_of::<Ticket>(), 72);
     }
 }
