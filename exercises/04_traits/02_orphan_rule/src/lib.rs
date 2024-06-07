@@ -4,8 +4,12 @@
 //  Look at the compiler error to get familiar with what it looks like.
 //  Then delete the code below and move on to the next exercise.
 
-impl PartialEq for u32 {
-    fn eq(&self, _other: &Self) -> bool {
-        todo!()
-    }
-}
+/*
+
+violation of orphan rule:
+
+https://doc.rust-lang.org/error_codes/E0117.html
+
+*/
+
+
