@@ -1,4 +1,5 @@
-enum Shape {
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub enum Shape {
     Circle,
     Square,
     Rectangle,
@@ -9,7 +10,13 @@ enum Shape {
 impl Shape {
     // TODO: Implement the `n_sides` method using a `match`.
     pub fn n_sides(&self) -> u8 {
-        todo!()
+        match self {
+            Shape::Circle => 0,
+            Shape::Square => 4,
+            Shape::Rectangle => 4,
+            Shape::Triangle => 3,
+            Shape::Pentagon => 5,
+        }
     }
 }
 
@@ -42,3 +49,4 @@ mod tests {
         assert_eq!(Shape::Pentagon.n_sides(), 5);
     }
 }
+

@@ -21,6 +21,14 @@ impl TryFrom<String> for Status {
     }
 }
 
+impl TryFrom<&str> for Status {
+    type Error = ParseStatusError;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        Status::try_from(value.to_string())
+    }
+}
+
 #[derive(Debug, thiserror::Error)]
 #[error("`{invalid_status}` is not a valid status. Use one of: ToDo, InProgress, Done")]
 pub struct ParseStatusError {
@@ -41,6 +49,18 @@ mod tests {
         assert_eq!(status, Status::InProgress);
 
         let status = Status::try_from("Done".to_string()).unwrap();
+        assert_eq!(status, Status::Done);
+    }
+
+    #[test]
+    fn test_try_from_str() {
+        let status = Status::try_from("todO").unwrap();
+        assert_eq!(status, Status::ToDo);
+
+        let status = Status::try_from("inprogress").unwrap();
+        assert_eq!(status, Status::InProgress);
+
+        let status = Status::try_from("DonE").unwrap();
         assert_eq!(status, Status::Done);
     }
 }
